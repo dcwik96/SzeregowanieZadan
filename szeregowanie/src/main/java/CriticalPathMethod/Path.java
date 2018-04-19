@@ -1,9 +1,5 @@
 package CriticalPathMethod;
 
-import org.jgrapht.DirectedGraph;
-import org.jgrapht.graph.DefaultDirectedGraph;
-import org.jgrapht.graph.DefaultEdge;
-
 import java.util.ArrayList;
 
 public class Path {
@@ -102,7 +98,8 @@ public class Path {
         }
     }
 
-    public void printWithLibraryAllTasksInPath() {
 
+    public ArrayList<Task> getTasks() {
+        return tasks;
     }
 }

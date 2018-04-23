@@ -10,9 +10,11 @@ public class Path {
     }
 
     public void findCriticalPath() {
-        setEarliestStartTime();
-        setLatestStartTime();
-        printCriticalPath();
+        if (checkIfAcyc()) {
+            setEarliestStartTime();
+            setLatestStartTime();
+            printCriticalPath();
+        } else throw new IllegalArgumentException();
     }
 
     public void printCriticalPath() {
@@ -96,6 +98,19 @@ public class Path {
         for (Task task : tasks) {
             System.out.println(task);
         }
+    }
+
+    private boolean checkIfAcyc() {
+        for (Task task : tasks) {
+            if (task.getSuccessors().size() != 0) {
+                for (int i : task.getSuccessors()) {
+                    for (int j : getTaskById(i).getSuccessors()) {
+                        if (j < task.getId()) return false;
+                    }
+                }
+            }
+        }
+        return true;
     }
 
 

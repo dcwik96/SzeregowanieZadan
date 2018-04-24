@@ -28,10 +28,22 @@ public class Path {
         System.out.println();
     }
 
+    private Task findLatestTask() {
+        Task latest = tasks.get(tasks.size() - 1);
+
+        for (int i = tasks.size() - 2; i >= 0; i--) {
+            if (latest.getEarliestStartTime() < tasks.get(i).getEarliestStartTime()) latest = tasks.get(i);
+        }
+
+        return latest;
+    }
+
     public void setLatestStartTime() {
+
+
         for (int i = tasks.size() - 1; i > 0; i--) {
             if (tasks.get(i).getSuccessors().isEmpty())
-                tasks.get(i).setLatestStartTime(tasks.get(i).getEarliestStartTime());
+                tasks.get(i).setLatestStartTime(findLatestTask().getEarliestStartTime() + findLatestTask().getDuration() - tasks.get(i).getDuration());
             else if (tasks.get(i).getSuccessors().size() == 1) {
                 tasks.get(i).setLatestStartTime(tasks.get(tasks.get(i).getSuccessors().get(0) - 1).getLatestStartTime() - tasks.get(i).getDuration());
             } else if (tasks.get(i).getSuccessors().size() > 1) {

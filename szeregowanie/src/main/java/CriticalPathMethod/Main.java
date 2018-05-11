@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.util.ArrayList;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
 
         Task task1 = new Task(1, 2, new int[]{2}, new int[]{});
 
@@ -34,6 +34,7 @@ public class Main {
         tasks.add(task8);
 
         Path path = new Path(tasks);
+        path.topology();
         path.findCriticalPath();
         path.printInConsoleAllTasksInPath();
 

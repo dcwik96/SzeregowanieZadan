@@ -10,11 +10,11 @@ public class Path {
     }
 
     public void findCriticalPath() {
-        if (checkIfAcyc()) {
-            setEarliestStartTime();
-            setLatestStartTime();
-            printCriticalPath();
-        } else throw new IllegalArgumentException();
+//        if (checkIfAcyc()) {
+        setEarliestStartTime();
+        setLatestStartTime();
+        printCriticalPath();
+//        } else throw new IllegalArgumentException();
     }
 
     public void printCriticalPath() {
@@ -123,6 +123,45 @@ public class Path {
             }
         }
         return true;
+    }
+
+    public void topology() {
+        isPeriodicity(tasks.get(0));
+
+        ArrayList<Task> stackOfTasks = new ArrayList<>();
+
+        for (Task task : tasks) {
+            if (!task.isVisited()) {
+                topologicalSortUtil(task, stackOfTasks);
+            }
+        }
+
+        this.tasks = stackOfTasks;
+    }
+
+    private void isPeriodicity(Task task) {
+        if (task.isVisited()) throw new UnsupportedOperationException();
+
+        task.setVisited(true);
+
+        for (int i : task.getSuccessors()) {
+            isPeriodicity(getTaskById(i));
+        }
+
+        task.setVisited(false);
+    }
+
+    private void topologicalSortUtil(Task task, ArrayList<Task> stackOfTasks) {
+        task.setVisited(true);
+
+        for (int j : task.getSuccessors()) {
+            if (!getTaskById(j).isVisited()) {
+                topologicalSortUtil(getTaskById(j), stackOfTasks);
+            }
+        }
+
+        stackOfTasks.add(task);
+
     }
 
 

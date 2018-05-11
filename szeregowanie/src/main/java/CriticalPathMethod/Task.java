@@ -1,12 +1,14 @@
 package CriticalPathMethod;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Task {
 
     //Li = Tp - Tw  jak Li = 0 to krytyczne ZDARZENIE
 
     private int id;
+    private boolean visited = false;
     private int duration;
     //Tw = max (Tw + tij) poprzednikow
     private int earliestStartTime;
@@ -82,6 +84,14 @@ public class Task {
 
     public void setPredecessors(ArrayList<Integer> predecessors) {
         this.predecessors = predecessors;
+    }
+
+    public boolean isVisited() {
+        return visited;
+    }
+
+    public void setVisited(boolean visited) {
+        this.visited = visited;
     }
 
     @Override

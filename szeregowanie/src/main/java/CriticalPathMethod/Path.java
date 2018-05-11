@@ -1,6 +1,7 @@
 package CriticalPathMethod;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Path {
     ArrayList<Task> tasks;
@@ -11,6 +12,7 @@ public class Path {
 
     public void findCriticalPath() {
 //        if (checkIfAcyc()) {
+        topology();
         setEarliestStartTime();
         setLatestStartTime();
         printCriticalPath();
@@ -112,20 +114,7 @@ public class Path {
         }
     }
 
-    private boolean checkIfAcyc() {
-        for (Task task : tasks) {
-            if (task.getSuccessors().size() != 0) {
-                for (int i : task.getSuccessors()) {
-                    for (int j : getTaskById(i).getSuccessors()) {
-                        if (j < task.getId()) return false;
-                    }
-                }
-            }
-        }
-        return true;
-    }
-
-    public void topology() {
+    private void topology() {
         isPeriodicity(tasks.get(0));
 
         ArrayList<Task> stackOfTasks = new ArrayList<>();
@@ -136,6 +125,8 @@ public class Path {
             }
         }
 
+        Collections.reverse(stackOfTasks);
+        stackOfTasks.forEach(x -> System.out.println(x.getId()));
         this.tasks = stackOfTasks;
     }
 

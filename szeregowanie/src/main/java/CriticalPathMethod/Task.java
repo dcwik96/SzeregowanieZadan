@@ -1,7 +1,6 @@
 package CriticalPathMethod;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class Task {
 
@@ -15,21 +14,22 @@ public class Task {
     //Tp = min (Tp + tij) nastepnikow
     private int latestStartTime;
 
-    private ArrayList<Integer> successors= new ArrayList<>();
+    private ArrayList<Integer> successors = new ArrayList<>();
     private ArrayList<Integer> predecessors = new ArrayList<>();
 
     /**
      * Wszystkie informacje podane w konstruktorze znamy, sa podane z pliku lub wpisane w tescie wywolujacym
-     * @param id - porzadek topologiczny
+     *
+     * @param id       - porzadek topologiczny
      * @param duration - czas trwania zadania
-     * @param su - nastepnik
-     * @param pre - poprzednik
+     * @param su       - nastepnik
+     * @param pre      - poprzednik
      */
     public Task(int id, int duration, int[] su, int[] pre) {
         this.id = id;
         this.duration = duration;
 
-        for (int i : su){
+        for (int i : su) {
             this.successors.add(i);
         }
 

@@ -34,7 +34,7 @@ public class Main {
         tasks.add(task8);
 
         Path path = new Path(tasks);
-        path.topology();
+//        path.topology();
         path.findCriticalPath();
         path.printInConsoleAllTasksInPath();
 

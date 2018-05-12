@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class Task {
     private int id;
     private boolean visited = false;
+    private boolean finished = false;
     private int duration;
     private int deadline;
     private int startTime;
@@ -29,6 +30,14 @@ public class Task {
         for (int j : pre) {
             this.predecessors.add(j);
         }
+    }
+
+    public boolean isFinished() {
+        return finished;
+    }
+
+    public void setFinished(boolean finished) {
+        this.finished = finished;
     }
 
     public int getId() {

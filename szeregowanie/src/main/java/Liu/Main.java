@@ -26,8 +26,9 @@ public class Main {
 
         LiuAlgorithm liuAlgorithm = new LiuAlgorithm(tasks);
 
-        liuAlgorithm.make();
+        liuAlgorithm.runLiuAlgorithm();
         liuAlgorithm.printInConsoleAllTasksInPath();
+        liuAlgorithm.countMaxLateness();
 
     }
 }

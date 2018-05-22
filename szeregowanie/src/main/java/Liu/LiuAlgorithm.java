@@ -16,7 +16,6 @@ public class LiuAlgorithm {
     }
 
     public void runLiuAlgorithm() {
-//        topology();
         isPeriodicity(tasks.get(0));
         for (Task task : tasks) {
             searchMinEndTime(task);
@@ -38,7 +37,7 @@ public class LiuAlgorithm {
         }
     }
 
-    public void algorithm() {
+    private void algorithm() {
         int time = 0;
         while (true) {
             Task currentTask = getCurrentTask(time);
@@ -96,11 +95,6 @@ public class LiuAlgorithm {
     }
 
 
-    public boolean isMoreImportant(Task old, Task newOne) {
-        return old.getEarliestEndTime() > newOne.getEarliestEndTime();
-    }
-
-
     private void searchMinEndTime(Task task) {
         int minimal = task.getDeadline();
         task.setEarliestEndTime(minimal);
@@ -113,21 +107,6 @@ public class LiuAlgorithm {
         }
     }
 
-    private void topology() {
-        isPeriodicity(tasks.get(0));
-
-        ArrayList<Task> stackOfTasks = new ArrayList<>();
-
-        for (Task task : tasks) {
-            if (!task.isVisited()) {
-                topologicalSortUtil(task, stackOfTasks);
-            }
-        }
-
-        Collections.reverse(stackOfTasks);
-        this.tasks = stackOfTasks;
-    }
-
     private void isPeriodicity(Task task) {
         if (task.isVisited()) throw new UnsupportedOperationException();
 
@@ -138,19 +117,6 @@ public class LiuAlgorithm {
         }
 
         task.setVisited(false);
-    }
-
-    private void topologicalSortUtil(Task task, ArrayList<Task> stackOfTasks) {
-        task.setVisited(true);
-
-        for (int j : task.getSuccessors()) {
-            if (!getTaskById(j).isVisited()) {
-                topologicalSortUtil(getTaskById(j), stackOfTasks);
-            }
-        }
-
-        stackOfTasks.add(task);
-
     }
 
     private Task getTaskById(int id) {

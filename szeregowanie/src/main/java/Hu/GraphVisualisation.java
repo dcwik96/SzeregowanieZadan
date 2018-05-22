@@ -1,4 +1,4 @@
-package CriticalPathMethod;
+package Hu;
 
 import com.mxgraph.layout.mxCircleLayout;
 import com.mxgraph.swing.mxGraphComponent;
@@ -17,7 +17,7 @@ public class GraphVisualisation extends JApplet {
     private JGraphXAdapter<String, DefaultEdge> jgxAdapter;
 
 
-    public void init(Path path) {
+    public void init(HuAlgorithm path) {
         ListenableGraph<String, DefaultEdge> g =
                 new DefaultListenableGraph<>(new DefaultDirectedGraph<>(DefaultEdge.class));
 
@@ -32,13 +32,13 @@ public class GraphVisualisation extends JApplet {
         resize(DEFAULT_SIZE);
 
         for (Task task : path.getTasks()) {
-            g.addVertex(String.valueOf(task.getId() + ":" + task.getDuration()));
+            g.addVertex(String.valueOf(task.getId()));
         }
 
         for (Task task : path.getTasks()) {
             if (!task.getSuccessors().isEmpty()) {
                 for (int i : task.getSuccessors()) {
-                    g.addEdge(String.valueOf(task.getId() + ":" + task.getDuration()), String.valueOf(i + ":" + path.getTaskById(i).getDuration()));
+                    g.addEdge(String.valueOf(task.getId()), String.valueOf(i));
                 }
             }
 

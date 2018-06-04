@@ -19,7 +19,7 @@ public class HuAlgorithm {
                 .forEach(task -> task.setLevel(task.getPredecessors().size()));
     }
 
-    private void algorithm() {
+    public void run() {
         int time = 1;
         List<Task> sortedTasksList;
         List<Integer> taskToDelete;
@@ -72,10 +72,6 @@ public class HuAlgorithm {
                 .collect(Collectors.toList());
     }
 
-    public void eval() {
-        algorithm();
-    }
-
     public List<Task> getTasks() {
         return tasks;
     }
@@ -87,5 +83,24 @@ public class HuAlgorithm {
             }
         }
         return null;
+    }
+
+    public void checkIfInTree() {
+        for (Task task : tasks) {
+            if (task.getSuccessors().size() > 1) throw new IllegalArgumentException();
+        }
+
+    }
+
+    public void isPeriodicity(Task task) {
+        if (task.isVisited()) throw new UnsupportedOperationException();
+
+        task.setVisited(true);
+
+        for (int i : task.getSuccessors()) {
+            isPeriodicity(getTaskById(i));
+        }
+
+        task.setVisited(false);
     }
 }

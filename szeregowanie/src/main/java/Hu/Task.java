@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Task {
+    private boolean visited = false;
     private boolean isFree;
     private int id;
     private int processingTime;
@@ -18,6 +19,14 @@ public class Task {
         this.successors = new ArrayList<>(succesors);
         this.predecessors = new ArrayList<>(predecesors);
         this.isFree = !this.hasPredecesors() ? true : false;
+    }
+
+    public boolean isVisited() {
+        return visited;
+    }
+
+    public void setVisited(boolean visited) {
+        this.visited = visited;
     }
 
     public int getId() {

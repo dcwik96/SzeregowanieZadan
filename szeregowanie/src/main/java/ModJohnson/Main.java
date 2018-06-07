@@ -53,45 +53,10 @@ public class Main {
         List<Task> toPrint = new ArrayList<>(n1);
         toPrint.addAll(n2);
 
-        createSchedule(toPrint);
+        Schedule.createSchedule(toPrint);
     }
 
-    private static void createSchedule(List<Task> toPrint) {
-        int placeToStart;
-        String[] machines = new String[3];
-        machines[0] = ("1)");
-        machines[1] = ("2)");
-        machines[2] = ("2)");
 
-        for (Task t : toPrint) {
-
-            for (int i = 0; i < t.getM1(); i++) {
-                machines[0] += t.getId();
-            }
-
-            placeToStart = machines[0].lastIndexOf(String.valueOf(t.getId()));
-
-            while (machines[1].length() <= placeToStart)
-                machines[1] += "-";
-
-            for (int i = 0; i < t.getM2(); ++i) {
-                machines[1] += t.getId();
-            }
-
-            placeToStart = machines[1].lastIndexOf(String.valueOf(t.getId()));
-
-            while (machines[2].length() <= placeToStart)
-                machines[2] += "-";
-
-            for (int i = 0; i < t.getM3(); ++i) {
-                machines[2] += t.getId();
-            }
-        }
-
-        for (String s : machines) {
-            System.out.println(s);
-        }
-    }
 
     private static void checkIfDominatedProperly(List<int[]> machines) throws Exception {
         for (int i = 0; i < machines.get(0).length; ++i) {
